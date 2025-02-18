@@ -16,7 +16,7 @@ private SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
                 selectedInternshipDetailsDTO.getSelection_id(),
                 selectedInternshipDetailsDTO.getSc_number(),
                 selectedInternshipDetailsDTO.getEmail(),
-                selectedInternshipDetailsDTO.getPhone_number(),
+                selectedInternshipDetailsDTO.getPhoneNumber(),
                 selectedInternshipDetailsDTO.getCompany(),
                 selectedInternshipDetailsDTO.getDesignation(),
                 selectedInternshipDetailsDTO.getAppointment_letter_pdf(),
