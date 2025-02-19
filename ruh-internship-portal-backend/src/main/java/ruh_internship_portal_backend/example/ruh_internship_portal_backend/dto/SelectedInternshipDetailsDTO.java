@@ -17,7 +17,7 @@ public class SelectedInternshipDetailsDTO {
 
     private String email;
 
-    private String phone_number;
+    private String phoneNumber;
 
     private String company;
 

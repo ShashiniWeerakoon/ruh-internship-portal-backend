@@ -23,7 +23,7 @@ public class SelectedInternshipDetails {
     @Column(name = "email")
     private String email;
     @Column(name = "Contact_number")
-    private String phone_number;
+    private String phoneNumber;
     @Column(name = "company_name")
     private String company;
     @Column(name = "designation")
