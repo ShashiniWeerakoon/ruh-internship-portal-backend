@@ -1,17 +1,19 @@
 package ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.Impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.SelectedInternshipDetailsDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.entity.SelectedInternshipDetails;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.repo.SelectedInternshipDetailsRepo;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.SelectedInternshipDetailsService;
+
 @Service
 public class SelectedInternshipDetailsImpl implements SelectedInternshipDetailsService {
-@Autowired
-private SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
-    @Autowired
-    private SelectedInternshipDetailsService selectedInternshipDetailsService;
+
+    private final SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
+
+    public SelectedInternshipDetailsImpl(SelectedInternshipDetailsRepo selectedInternshipDetailsRepo) {
+        this.selectedInternshipDetailsRepo = selectedInternshipDetailsRepo;
+    }
 
     @Override
     public String getSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
@@ -36,11 +38,10 @@ private SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
     public String updateSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
         if (selectedInternshipDetailsRepo.existsById(selectedInternshipDetailsDTO.getSelection_id())) {
             SelectedInternshipDetails selectedInternshipDetails = selectedInternshipDetailsRepo.getReferenceById(selectedInternshipDetailsDTO.getSelection_id());
-            ;
             selectedInternshipDetails.setEmail(selectedInternshipDetailsDTO.getEmail());
             selectedInternshipDetails.setPhoneNumber(selectedInternshipDetailsDTO.getPhoneNumber());
             selectedInternshipDetails.setSupervisor_name(selectedInternshipDetailsDTO.getSupervisor_name());
-            return selectedInternshipDetailsDTO.getSc_number() + "updated successfully";
+            return selectedInternshipDetailsDTO.getSc_number() + " updated successfully";
         } else {
             throw new RuntimeException("SelectedInternshipDetails not found");
         }

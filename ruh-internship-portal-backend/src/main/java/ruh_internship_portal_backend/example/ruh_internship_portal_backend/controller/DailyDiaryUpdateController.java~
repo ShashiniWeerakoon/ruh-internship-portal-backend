@@ -20,10 +20,4 @@ public class DailyDiaryUpdateController {
         return "save";
     }
 
-    @PutMapping("/update")
-    public String updateDailyDiaryUpdate(@RequestBody DailyDiaryUpdateDTO dailyDiaryUpdateDTO) {
-        String message = dailyDiaryUpdateService.updateDailyDiaryUpdate(dailyDiaryUpdateDTO);
-        return message;
-    }
-
 }

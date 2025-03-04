@@ -24,4 +24,17 @@ public class DailyDiaryUpdateImpl implements DailyDiaryUpdateService {
         dailyDiaryUpdateRepo.save(dailyDiaryUpdate);
         return "save";
     }
+
+    @Override
+    public String updateDailyDiaryUpdate(DailyDiaryUpdateDTO dailyDiaryUpdateDTO) {
+        if (dailyDiaryUpdateRepo.existsById(dailyDiaryUpdateDTO.getId())) {
+            DailyDiaryUpdate dailyDiaryUpdate = dailyDiaryUpdateRepo.getReferenceById(dailyDiaryUpdateDTO.getId());
+            dailyDiaryUpdate.setDate(dailyDiaryUpdateDTO.getDate());
+            dailyDiaryUpdate.setNotes(dailyDiaryUpdateDTO.getNotes());
+            dailyDiaryUpdateRepo.save(dailyDiaryUpdate);
+            return dailyDiaryUpdateDTO.getSc_number()+ " " + dailyDiaryUpdateDTO.getNotes() + " note update successfully";
+        } else {
+            throw new RuntimeException("DailyDiaryUpdate not found");
+        }
+    }
 }
