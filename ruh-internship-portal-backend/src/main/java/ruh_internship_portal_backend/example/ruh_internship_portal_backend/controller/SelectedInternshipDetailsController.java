@@ -12,6 +12,9 @@ public class SelectedInternshipDetailsController {
 
     @Autowired
     private SelectedInternshipDetailsService selectedinternshipDetails;
+    @Autowired
+    private SelectedInternshipDetailsService selectedInternshipDetailsService;
+
     @PostMapping("/save")
     public String getSelectedInternshipDetails(@RequestBody SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
 
@@ -19,5 +22,9 @@ public class SelectedInternshipDetailsController {
             return "save";
         }
 
-
+        @PutMapping("/update")
+        public String updateSelectedInternshipDetails(@RequestBody SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
+            String message = selectedInternshipDetailsService.updateSelectedInternshipDetails(selectedInternshipDetailsDTO);
+            return message;
+        }
     }

@@ -35,14 +35,12 @@ private SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
     @Override
     public String updateSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
         if (selectedInternshipDetailsRepo.existsById(selectedInternshipDetailsDTO.getSelection_id())) {
-            SelectedInternshipDetails selectedInternshipDetails = selectedInternshipDetailsRepo.getReferenceById(selectedInternshipDetailsDTO.getSelection_id());
-            ;
+            SelectedInternshipDetails selectedInternshipDetails = selectedInternshipDetailsRepo.getReferenceById(selectedInternshipDetailsDTO.getSelection_id());;
             selectedInternshipDetails.setEmail(selectedInternshipDetailsDTO.getEmail());
             selectedInternshipDetails.setPhoneNumber(selectedInternshipDetailsDTO.getPhoneNumber());
             selectedInternshipDetails.setSupervisor_name(selectedInternshipDetailsDTO.getSupervisor_name());
             return selectedInternshipDetailsDTO.getSc_number() + "updated successfully";
-        } else {
+    }else{
             throw new RuntimeException("SelectedInternshipDetails not found");
         }
-    }
 }
