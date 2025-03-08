@@ -3,6 +3,7 @@ package ruh_internship_portal_backend.example.ruh_internship_portal_backend.cont
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.FeedbackDTO;
+import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.request.FeedbackUpdateDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.FeedbackService;
 
 @RestController
@@ -12,7 +13,7 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public String saveFeedback(@RequestBody FeedbackDTO feedbackDTO) {
         feedbackService.saveFeedback(feedbackDTO);
         return "save";
@@ -21,6 +22,12 @@ public class FeedbackController {
     public String HelloWorld() {
 
         return "Hello World";
+    }
+
+    @PutMapping("/update")
+    public String updateFeedback(@RequestBody FeedbackUpdateDTO feedbackUpdateDTO) {
+        String message = feedbackService.updateFeedback(feedbackUpdateDTO);
+        return message;
     }
 
 }

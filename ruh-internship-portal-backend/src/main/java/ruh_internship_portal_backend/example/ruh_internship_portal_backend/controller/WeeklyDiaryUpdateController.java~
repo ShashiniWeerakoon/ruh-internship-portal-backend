@@ -1,0 +1,22 @@
+package ruh_internship_portal_backend.example.ruh_internship_portal_backend.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.WeeklyDiaryUpdateDTO;
+import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.WeeklyDiaryUpdateService;
+
+@RestController
+@CrossOrigin
+@RequestMapping("/api/diaryUpdate/weekly")
+public class WeeklyDiaryUpdateController {
+    @Autowired
+    private WeeklyDiaryUpdateService weeklyDiaryUpdateService;
+
+    public String saveWeeklyDiaryUpdate(@RequestBody WeeklyDiaryUpdateDTO weeklyDiaryUpdateDTO) {
+         weeklyDiaryUpdateService.saveWeeklyDiaryUpdate(weeklyDiaryUpdateDTO);
+            return "save";
+    }
+}

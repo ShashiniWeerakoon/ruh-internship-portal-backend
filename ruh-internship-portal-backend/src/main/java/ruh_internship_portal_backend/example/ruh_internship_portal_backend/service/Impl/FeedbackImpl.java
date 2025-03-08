@@ -3,6 +3,7 @@ package ruh_internship_portal_backend.example.ruh_internship_portal_backend.serv
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.FeedbackDTO;
+import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.request.FeedbackUpdateDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.entity.Feedback;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.repo.FeedbackRepo;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.FeedbackService;
@@ -23,5 +24,18 @@ public class FeedbackImpl implements FeedbackService {
         );
         feedbackRepo.save(feedback);
         return "save";
+    }
+
+    @Override
+    public String updateFeedback(FeedbackUpdateDTO feedbackUpdateDTO) {
+        if(feedbackRepo.existsById(feedbackUpdateDTO.getFeedback_id())){
+            Feedback feedback = feedbackRepo.getReferenceById(feedbackUpdateDTO.getFeedback_id());
+            feedback.setFeedback(feedbackUpdateDTO.getFeedback());
+            feedbackRepo.save(feedback);
+            return feedbackUpdateDTO.getFeedback() + " updated successfully";
+
+        }else{
+            throw new RuntimeException("Feedback not found");
+        }
     }
 }
