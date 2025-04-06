@@ -4,4 +4,6 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.W
 
 public interface WeeklyDiaryUpdateService {
     String saveWeeklyDiaryUpdate(WeeklyDiaryUpdateDTO weeklyDiaryUpdateDTO);
+
+    String updateWeeklyDiaryUpdate(WeeklyDiaryUpdateDTO weeklyDiaryUpdateDTO);
 }

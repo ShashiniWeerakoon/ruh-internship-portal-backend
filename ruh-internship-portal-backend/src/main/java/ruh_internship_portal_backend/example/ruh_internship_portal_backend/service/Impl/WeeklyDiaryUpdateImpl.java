@@ -25,4 +25,17 @@ public class WeeklyDiaryUpdateImpl implements WeeklyDiaryUpdateService {
         weeklyDiaryUpdateRepo.save(weeklyDiaryUpdate);
         return "save";
     }
+
+    @Override
+    public String updateWeeklyDiaryUpdate(WeeklyDiaryUpdateDTO weeklyDiaryUpdateDTO) {
+        if (weeklyDiaryUpdateRepo.existsById(weeklyDiaryUpdateDTO.getId())) {
+            WeeklyDiaryUpdate weeklyDiaryUpdate = weeklyDiaryUpdateRepo.getReferenceById(weeklyDiaryUpdateDTO.getId());
+            weeklyDiaryUpdate.setWeeknumber(weeklyDiaryUpdateDTO.getWeeknumber());
+            weeklyDiaryUpdate.setNotes(weeklyDiaryUpdateDTO.getNotes());
+            weeklyDiaryUpdateRepo.save(weeklyDiaryUpdate);
+            return weeklyDiaryUpdateDTO.getSc_number()+ " " + weeklyDiaryUpdateDTO.getNotes() + " note update successfully";
+        } else {
+            throw new RuntimeException("Weekly Diary Update not found");
+        }
+    }
 }

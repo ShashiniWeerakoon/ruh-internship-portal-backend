@@ -16,7 +16,7 @@ public class DailyDiaryUpdateImpl implements DailyDiaryUpdateService {
     public String saveDailyDiaryUpdate(DailyDiaryUpdateDTO dailyDiaryUpdateDTO) {
         DailyDiaryUpdate dailyDiaryUpdate = new DailyDiaryUpdate(
                 dailyDiaryUpdateDTO.getId(),
-                dailyDiaryUpdateDTO.getSc_number(),
+                dailyDiaryUpdateDTO.getScNumber(),
                 dailyDiaryUpdateDTO.getDate(),
                 dailyDiaryUpdateDTO.getNotes(),
                 dailyDiaryUpdateDTO.getSubmittedAt()
@@ -31,9 +31,8 @@ public class DailyDiaryUpdateImpl implements DailyDiaryUpdateService {
             DailyDiaryUpdate dailyDiaryUpdate = dailyDiaryUpdateRepo.getReferenceById(dailyDiaryUpdateDTO.getId());
             dailyDiaryUpdate.setDate(dailyDiaryUpdateDTO.getDate());
             dailyDiaryUpdate.setNotes(dailyDiaryUpdateDTO.getNotes());
-            dailyDiaryUpdate.setSc_number(dailyDiaryUpdateDTO.getSc_number());
             dailyDiaryUpdateRepo.save(dailyDiaryUpdate);
-            return dailyDiaryUpdateDTO.getSc_number() + " note updated successfully.";
+            return dailyDiaryUpdateDTO.getScNumber() + " note updated successfully.";
         } else {
             throw new RuntimeException("DailyDiaryUpdate not found");
         }

@@ -16,4 +16,10 @@ public class WeeklyDiaryUpdateController {
          weeklyDiaryUpdateService.saveWeeklyDiaryUpdate(weeklyDiaryUpdateDTO);
             return "save";
     }
+
+    @PutMapping("/update")
+    public String updateWeeklyDiaryUpdate(@RequestBody WeeklyDiaryUpdateDTO weeklyDiaryUpdateDTO) {
+        String message = weeklyDiaryUpdateService.updateWeeklyDiaryUpdate(weeklyDiaryUpdateDTO);
+        return message;
+    }
 }
