@@ -4,4 +4,6 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.S
 
 public interface SelectedInternshipDetailsService {
     public String getSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO);
+
+    String updateSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO);
 }
