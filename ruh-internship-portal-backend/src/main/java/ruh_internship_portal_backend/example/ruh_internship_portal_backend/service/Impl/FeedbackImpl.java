@@ -8,6 +8,8 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.entit
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.repo.FeedbackRepo;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.FeedbackService;
 
+import java.util.List;
+
 @Service
 public class FeedbackImpl implements FeedbackService {
     @Autowired
@@ -37,5 +39,8 @@ public class FeedbackImpl implements FeedbackService {
         }else{
             throw new RuntimeException("Feedback not found");
         }
+    }
+    public List<Feedback> getAllFeedback() {
+        return feedbackRepo.findAll();
     }
 }
