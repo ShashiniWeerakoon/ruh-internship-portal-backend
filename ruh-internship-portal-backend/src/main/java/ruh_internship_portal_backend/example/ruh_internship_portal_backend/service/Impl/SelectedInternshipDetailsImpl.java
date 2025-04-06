@@ -1,5 +1,6 @@
 package ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.SelectedInternshipDetailsDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.entity.SelectedInternshipDetails;
@@ -9,11 +10,8 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.servi
 @Service
 public class SelectedInternshipDetailsImpl implements SelectedInternshipDetailsService {
 
-    private final SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
-
-    public SelectedInternshipDetailsImpl(SelectedInternshipDetailsRepo selectedInternshipDetailsRepo) {
-        this.selectedInternshipDetailsRepo = selectedInternshipDetailsRepo;
-    }
+    @Autowired
+    private SelectedInternshipDetailsRepo selectedInternshipDetailsRepo;
 
     @Override
     public String getSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
@@ -29,7 +27,6 @@ public class SelectedInternshipDetailsImpl implements SelectedInternshipDetailsS
                 selectedInternshipDetailsDTO.getEnd_date(),
                 selectedInternshipDetailsDTO.getSupervisor_name()
         );
-
         selectedInternshipDetailsRepo.save(selectedInternshipDetails);
         return "save";
     }
@@ -37,10 +34,21 @@ public class SelectedInternshipDetailsImpl implements SelectedInternshipDetailsS
     @Override
     public String updateSelectedInternshipDetails(SelectedInternshipDetailsDTO selectedInternshipDetailsDTO) {
         if (selectedInternshipDetailsRepo.existsById(selectedInternshipDetailsDTO.getSelection_id())) {
-            SelectedInternshipDetails selectedInternshipDetails = selectedInternshipDetailsRepo.getReferenceById(selectedInternshipDetailsDTO.getSelection_id());
-            selectedInternshipDetails.setEmail(selectedInternshipDetailsDTO.getEmail());
-            selectedInternshipDetails.setPhoneNumber(selectedInternshipDetailsDTO.getPhoneNumber());
-            selectedInternshipDetails.setSupervisor_name(selectedInternshipDetailsDTO.getSupervisor_name());
+            SelectedInternshipDetails existingDetails = selectedInternshipDetailsRepo.getReferenceById(selectedInternshipDetailsDTO.getSelection_id());
+
+            // Update the fields
+            existingDetails.setSc_number(selectedInternshipDetailsDTO.getSc_number());
+            existingDetails.setEmail(selectedInternshipDetailsDTO.getEmail());
+            existingDetails.setPhoneNumber(selectedInternshipDetailsDTO.getPhoneNumber());
+            existingDetails.setCompany(selectedInternshipDetailsDTO.getCompany());
+            existingDetails.setDesignation(selectedInternshipDetailsDTO.getDesignation());
+            existingDetails.setAppointment_letter_pdf(selectedInternshipDetailsDTO.getAppointment_letter_pdf());
+            existingDetails.setStart_date(selectedInternshipDetailsDTO.getStart_date());
+            existingDetails.setEnd_date(selectedInternshipDetailsDTO.getEnd_date());
+            existingDetails.setSupervisor_name(selectedInternshipDetailsDTO.getSupervisor_name());
+
+            // Save the updated entity
+            selectedInternshipDetailsRepo.save(existingDetails);
             return selectedInternshipDetailsDTO.getSc_number() + " updated successfully";
         } else {
             throw new RuntimeException("SelectedInternshipDetails not found");
