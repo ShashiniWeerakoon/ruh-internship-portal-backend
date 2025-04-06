@@ -10,4 +10,6 @@ public interface FeedbackService {
 
     String updateFeedback(FeedbackUpdateDTO feedbackUpdateDTO);
     List<Feedback> getAllFeedback();
+
+    List<Feedback> findByScNumber(String scNumber);
 }

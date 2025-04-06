@@ -40,7 +40,16 @@ public class FeedbackImpl implements FeedbackService {
             throw new RuntimeException("Feedback not found");
         }
     }
+    @Override
     public List<Feedback> getAllFeedback() {
         return feedbackRepo.findAll();
+    }
+    @Override
+    public List<Feedback> findByScNumber(String scNumber) {
+        List<Feedback> result = feedbackRepo.findByScNumberIgnoreCase(scNumber); // Case-insensitive
+        if (result.isEmpty()) {
+            System.out.println("No feedback found for SC Number: " + scNumber);
+        }
+        return result;
     }
 }

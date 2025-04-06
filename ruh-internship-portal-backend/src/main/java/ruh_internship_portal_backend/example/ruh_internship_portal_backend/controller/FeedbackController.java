@@ -6,6 +6,9 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.F
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.request.FeedbackUpdateDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.service.FeedbackService;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.entity.Feedback;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
@@ -34,6 +37,12 @@ public class FeedbackController {
     @GetMapping("/all")
     public List<Feedback> getAllFeedback() {
         return feedbackService.getAllFeedback();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Feedback>> searchFeedbackByScNumber(@RequestParam String scNumber) {
+        List<Feedback> feedbackList = feedbackService.findByScNumber(scNumber);
+        return ResponseEntity.ok(feedbackList);
     }
 
 }
