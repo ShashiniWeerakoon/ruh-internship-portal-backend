@@ -18,7 +18,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedback_id;
     @Column(name = "sc_number",nullable = false)
-    private String scNumber;
+    private String sc_number;
     @Column(name = "company_name")
     private String company_name;
     @Column(name = "feedback_notes",columnDefinition = "TEXT", nullable = false)
@@ -28,7 +28,7 @@ public class Feedback {
 
     public Feedback(Long feedbackId, String scNumber, String companyName, String feedback) {
         this.feedback_id = feedbackId;
-        this.scNumber = scNumber;
+        this.sc_number = scNumber;
         this.company_name = companyName;
         this.feedback = feedback;
         this.submittedAt = LocalDateTime.now();
