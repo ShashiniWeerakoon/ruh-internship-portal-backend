@@ -7,7 +7,7 @@ import ruh_internship_portal_backend.example.ruh_internship_portal_backend.servi
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/diaryUpdate/daily")
+    @RequestMapping("/api/diaryUpdate/daily")
 public class DailyDiaryUpdateController {
 
     @Autowired

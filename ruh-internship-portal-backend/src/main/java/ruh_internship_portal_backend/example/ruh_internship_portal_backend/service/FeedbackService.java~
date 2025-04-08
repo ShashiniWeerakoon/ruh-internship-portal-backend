@@ -13,4 +13,8 @@ public interface FeedbackService {
     String updateFeedback(FeedbackUpdateDTO feedbackUpdateDTO);
 
     List<FeedbackDTO> getAllFeedback() throws JsonProcessingException;
+
+    boolean doesFeedbackExistForScNumber(String scNumber);
+
+    FeedbackDTO submitFeedback(FeedbackDTO feedbackDTO);
 }
