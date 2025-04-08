@@ -3,6 +3,7 @@ package ruh_internship_portal_backend.example.ruh_internship_portal_backend.serv
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.FeedbackDTO;
 import ruh_internship_portal_backend.example.ruh_internship_portal_backend.dto.request.FeedbackUpdateDTO;
@@ -21,15 +22,22 @@ public class FeedbackImpl implements FeedbackService {
 
     @Override
     public String saveFeedback(FeedbackDTO feedbackDTO) {
-        Feedback feedback = new Feedback(
-                feedbackDTO.getFeedback_id(),
-                feedbackDTO.getSc_number(),
-                feedbackDTO.getCompany_name(),
-                feedbackDTO.getFeedback()
-        );
-        feedbackRepo.save(feedback);
-        return "save";
+        try {
+            Feedback feedback = new Feedback(
+                    feedbackDTO.getFeedback_id(),
+                    feedbackDTO.getSc_number(),
+                    feedbackDTO.getCompany_name(),
+                    feedbackDTO.getFeedback()
+            );
+            feedbackRepo.save(feedback);
+            return "Feedback saved successfully.";
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to save feedback. Database error: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error occurred while saving feedback: " + e.getMessage());
+        }
     }
+
 
     @Override
     public String updateFeedback(FeedbackUpdateDTO feedbackUpdateDTO) {
@@ -54,7 +62,7 @@ public class FeedbackImpl implements FeedbackService {
             feedbackDTO.setSc_number(feedback.getScNumber());
             feedbackDTO.setCompany_name(feedback.getCompany_name());
             feedbackDTO.setFeedback(feedback.getFeedback());
-            feedbackDTO.setCreatedDate(feedback.getCreatedDate()); // Add this line
+            feedbackDTO.setCreatedDate(feedback.getCreatedDate());
             feedbackDTOList.add(feedbackDTO);
         }
         return feedbackDTOList;
