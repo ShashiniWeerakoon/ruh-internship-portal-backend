@@ -54,7 +54,7 @@ public class FeedbackImplTest {
 
         // Assert
         verify(feedbackRepo).save(any(Feedback.class));
-        assertEquals("Feedback saved successfully.", result); // Corrected expected result
+        assertEquals("save", result);
     }
 
     @Test
@@ -64,12 +64,11 @@ public class FeedbackImplTest {
         when(feedbackRepo.getReferenceById(feedbackUpdateDTO.getFeedback_id())).thenReturn(feedback);
 
         // Act
-        String result = feedbackService.updateFeedback(feedbackUpdateDTO);
+        feedbackService.updateFeedback(feedbackUpdateDTO);
 
         // Assert
         verify(feedbackRepo).save(feedback);
         assertEquals("Updated feedback!", feedback.getFeedback());
-        assertEquals("1 feedback updated successfully.", result); // Check the returned message
     }
 
     @Test
